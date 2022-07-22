@@ -1,0 +1,34 @@
+*{
+  box-sizing: border-box;
+}
+.App {
+    margin: 0 auto;
+    width: 100%;
+    height: 100vh;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+  .over{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top:0;
+    left: 0;
+    backdrop-filter: blur(6px);
+    background-color: rgba(0, 0, 0, 0.23);
+    padding: 73px 10px 10px 10px ;
+
+    .wrapper{
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+      border:1px solid #fff;
+
+    }
+  }
+}

@@ -8,34 +8,36 @@ import {Pagination} from "../paginate/Pagination";
 export const Cards = () => {
 
     const [items, setItems] = useState<ItemsType | []>([])
-    const pageCount= 80
+    const pageCount = 80
     const [currentPage, setCurrentPage] = useState(1)
 
 
-    useEffect(()=>{
+    useEffect(() => {
         axios.get(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=3`)
-            .then(res=>setItems(res.data))
-    },[currentPage])
+            .then(res => setItems(res.data))
+    }, [currentPage])
 
-    const onChangePage = (page:number)=>{
+    const onChangePage = (page: number) => {
         setCurrentPage(page)
     }
 
-    const elementBeer = items.map((i)=>{
-        return <CardBeer key={i.id} name={i.name} description={i.description} image_url={i.image_url} item={i}/>
+    const elementBeer = items.map((i) => {
+        return <CardBeer key={i.id} name={i.name}
+                         description={i.description} image_url={i.image_url}
+                         item={i} itemId={i.id}/>
     })
 
     return (
         <div className={style.wrapper}>
             <div className={style.container__items}>
-            {elementBeer}
+                {elementBeer}
             </div>
             <div className={style.container__paginate}>
 
-            <Pagination currentPage={currentPage}
-                        pageCount={pageCount}
-                        onChangePage={onChangePage}
-            />
+                <Pagination currentPage={currentPage}
+                            pageCount={pageCount}
+                            onChangePage={onChangePage}
+                />
             </div>
 
         </div>
@@ -48,11 +50,11 @@ type ItemsType = Array<ItemType>
 export type ItemType = {
     id: number
     name: string
-    tagline:string
+    tagline: string
     first_brewed: string
     description: string
-    image_url:string
-    abv:number
+    image_url: string
+    abv: number
     ibu: number
     target_fg: number
     target_og: number

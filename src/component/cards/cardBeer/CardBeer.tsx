@@ -1,29 +1,44 @@
-import React, {FC} from "react";
+import React, {FC, useState} from "react";
 import style from "./CardBeer.module.scss"
 import imgBeer from "../../../assets/image/pivo.png"
 import {ItemType} from "../Cards";
-// import beerImg from "../../../assets/image/beer.png"
+import { useNavigate} from "react-router-dom";
+
 
 
 type CardBeerPropsType = {
     name:string
     description:string
     image_url:string
-
+    itemId:number
     item:ItemType
 }
-export const CardBeer:FC<CardBeerPropsType> = ({name, description, image_url, ...restProps}) => {
+export const CardBeer:FC<CardBeerPropsType> = ({name, description, image_url,itemId,item, ...restProps}) => {
+    const [isRed, setIsRed] = useState(false)
+    const navigate = useNavigate();
 
     let descr = description.length> 140 ? `${description.slice(0 , 140)} ...`: description
-
+    React.useEffect(() => {
+        if (isRed) {
+            navigate('/card/');
+        }
+    });
+    const redirect = ()=>{
+        setIsRed(true)
+    }
     return (
-        <div className={style.container}>
-            <div className={style.container__img}>
-                <img className={style.imgBeer} src={`${!image_url? imgBeer :image_url  }`} alt="imgBeer"/>
+
+            <div className={style.container} onClick={()=>redirect()}>
+
+                <div className={style.container__img}>
+                    <img className={style.imgBeer}
+                         src={`${!image_url ? imgBeer : image_url}`}
+                         alt="imgBeer"/>
+                </div>
+                <div className={style.title}>{name}</div>
+                <div className={style.description}>{descr}</div>
             </div>
-            <div className={style.title}>{name}</div>
-            <div className={style.description}>{descr}</div>
-        </div>
+
     );
 };
 

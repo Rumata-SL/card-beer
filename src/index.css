@@ -5,8 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-    background-image: url("./assets/image/pub.jpg");
-    background-size: cover;
+    background-image: linear-gradient(to right top, #058986, #069894, #06a7a3, #07b6b2, #08c6c1, #00c9d4, #00cbe6, #00cdf6, #00beff, #42acff, #8194ff, #b476ea);
+    /*background-image: linear-gradient(to right bottom, #043e63, #00658c, #008fb3, #09bbd6, #3de8f4);*/
+  /*  background-image: url("./assets/image/pub.jpg");
+    background-size: cover;*/
 }
 
 code {

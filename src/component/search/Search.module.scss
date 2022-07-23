@@ -21,7 +21,7 @@
     border: 1px solid #fff;
     border-radius: 4px;
     font-size: 1.1em;
-    color:#fff;
+    color:#000;
     background-color: rgba(255, 255, 255, 0.12);
     
     @media screen and (max-width: 750px){
@@ -32,8 +32,8 @@
 
   }
   input::placeholder{
-    color:#ffffff;
-    opacity: .7;
+    color: #000;
+    opacity: .4;
   }
 
 }

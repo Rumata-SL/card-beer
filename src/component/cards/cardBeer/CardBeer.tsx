@@ -11,7 +11,6 @@ type CardBeerPropsType = {
     image_url:string
 
     item:ItemType
-
 }
 export const CardBeer:FC<CardBeerPropsType> = ({name, description, image_url, ...restProps}) => {
 

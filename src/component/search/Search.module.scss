@@ -1,16 +1,21 @@
 
 .wrapper {
-  position: absolute;
+  //position: absolute;
   width: 400px;
   height: 40px;
-  top: 20px;
-  left: calc(50% - 200px);
+  //top: 20px;
+  //left: calc(50% - 200px);
 
   @media screen and (max-width: 750px){
     width: 300px;
     height: 35px;
-    left: calc(50% - 150px);
+    //left: calc(50% - 150px);
   }
+  @media screen and (max-width: 460px){
+    width: 250px;
+    height: 35px;
+  }
+
 
 
   .input {
@@ -23,9 +28,18 @@
     font-size: 1.1em;
     color:#000;
     background-color: rgba(255, 255, 255, 0.12);
-    
+    transform: scale(1);
+    transition: transform 0.6s;
+
+
+
     @media screen and (max-width: 750px){
       width: 300px;
+      height: 35px;
+      padding: 8px;
+    }
+    @media screen and (max-width: 460px){
+      width: 250px;
       height: 35px;
       padding: 8px;
     }
@@ -35,5 +49,14 @@
     color: #000;
     opacity: .4;
   }
+  input:focus {
+    outline: none;
+    border: 1px solid #05304f;
+  }
+  input:hover {
+    transform: scale(1.05);
+    transition: transform 0.6s;
+  }
+
 
 }

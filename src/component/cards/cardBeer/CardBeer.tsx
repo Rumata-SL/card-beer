@@ -1,6 +1,7 @@
 import React, {FC} from "react";
 import style from "./CardBeer.module.scss"
-// import imgBeer from "../../../assets/image/pivo.png"
+import imgBeer from "../../../assets/image/pivo.png"
+import {ItemType} from "../Cards";
 // import beerImg from "../../../assets/image/beer.png"
 
 
@@ -9,15 +10,17 @@ type CardBeerPropsType = {
     description:string
     image_url:string
 
+    item:ItemType
+
 }
-export const CardBeer:FC<CardBeerPropsType> = ({name, description, image_url}) => {
+export const CardBeer:FC<CardBeerPropsType> = ({name, description, image_url, ...restProps}) => {
 
     let descr = description.length> 140 ? `${description.slice(0 , 140)} ...`: description
 
     return (
         <div className={style.container}>
             <div className={style.container__img}>
-                <img className={style.imgBeer} src={image_url} alt="imgBeer"/>
+                <img className={style.imgBeer} src={`${!image_url? imgBeer :image_url  }`} alt="imgBeer"/>
             </div>
             <div className={style.title}>{name}</div>
             <div className={style.description}>{descr}</div>

@@ -2,34 +2,50 @@ import React, {useEffect, useState} from "react";
 import style from "./Cards.module.scss"
 import {CardBeer} from "./cardBeer/CardBeer";
 import axios from "axios";
+import {Pagination} from "../paginate/Pagination";
 
 
 export const Cards = () => {
 
     const [items, setItems] = useState<ItemsType | []>([])
-    const [page, setPage]= useState(2)
-    const [currentPage, setCurrentPage] = useState(9)
+    const pageCount= 80
+    const [currentPage, setCurrentPage] = useState(1)
+
 
     useEffect(()=>{
-        axios.get(`https://api.punkapi.com/v2/beers?page=${page}&per_page=${currentPage}`)
+        axios.get(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=3`)
             .then(res=>setItems(res.data))
-    },[])
+    },[currentPage])
+
+    const onChangePage = (page:number)=>{
+        setCurrentPage(page)
+    }
 
     const elementBeer = items.map((i)=>{
-        return <CardBeer key={i.id} name={i.name} description={i.description} image_url={i.image_url}/>
+        return <CardBeer key={i.id} name={i.name} description={i.description} image_url={i.image_url} item={i}/>
     })
 
     return (
         <div className={style.wrapper}>
-
+            <div className={style.container__items}>
             {elementBeer}
+            </div>
+            <div className={style.container__paginate}>
+
+            <Pagination currentPage={currentPage}
+                        pageCount={pageCount}
+                        onChangePage={onChangePage}
+            />
+            </div>
+
         </div>
     );
 };
 
 type ItemsType = Array<ItemType>
 
-type ItemType = {
+
+export type ItemType = {
     id: number
     name: string
     tagline:string

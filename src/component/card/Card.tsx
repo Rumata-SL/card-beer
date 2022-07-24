@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
-import style from "./Card.module.scss"
 import {useParams} from "react-router-dom";
-import axios from "axios";
 import {ItemType} from "../cards/Cards";
+import style from "./Card.module.scss"
+import axios from "axios";
 
 export const Card = () => {
     const {id} = useParams()
@@ -18,6 +18,7 @@ export const Card = () => {
     return (
         <div className={style.container}>
             <div>
+                <div>{item.name}</div>
                 <div>{item.tagline}</div>
             </div>
         </div>

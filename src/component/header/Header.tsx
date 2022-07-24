@@ -1,8 +1,8 @@
-import React from "react";
-import style from "./Header.module.scss"
-import {Search} from "../search/Search";
 import home from "../../assets/image/home-page.png"
 import {NavLink} from "react-router-dom";
+import style from "./Header.module.scss"
+import {Search} from "../search/Search";
+import React from "react";
 
 type IsActive = {
     isActive: boolean
@@ -14,8 +14,9 @@ export const Header = () => {
     return (
         <div className={style.container}>
             <div className={style.container__img}>
-                {/*<img className={style.logo__img} src={home} alt="beer"/>*/}
-                <NavLink className={setActive} to={"/cards/"}><img className={style.logo__img} src={home} alt="beer"/></NavLink>
+                <NavLink className={setActive} to={"/cards/"}>
+                    <img className={style.logo__img} src={home} alt="beer"/>
+                </NavLink>
             </div>
             <Search/>
         </div>

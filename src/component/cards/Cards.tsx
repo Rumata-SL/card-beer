@@ -1,20 +1,23 @@
+import {SkeletonCardBeer} from "../skeletons/SkeletonCardBeer";
 import React, {useEffect, useState} from "react";
-import style from "./Cards.module.scss"
-import {CardBeer} from "./cardBeer/CardBeer";
-import axios from "axios";
 import {Pagination} from "../paginate/Pagination";
+import {CardBeer} from "./cardBeer/CardBeer";
+import style from "./Cards.module.scss"
+import axios from "axios";
 
 
 export const Cards = () => {
-
-    const [items, setItems] = useState<ItemsType | []>([])
     const pageCount = 80
+    const [isLoading, setIsLoading] = useState(true)
     const [currentPage, setCurrentPage] = useState(1)
-
+    const [items, setItems] = useState<ItemsType | []>([])
 
     useEffect(() => {
-        axios.get(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=3`)
-            .then(res => setItems(res.data))
+            axios.get(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=4`)
+                .then(res => {
+                    setItems(res.data)
+                    setIsLoading(false)
+                })
     }, [currentPage])
 
     const onChangePage = (page: number) => {
@@ -24,13 +27,16 @@ export const Cards = () => {
     const elementBeer = items.map((i) => {
         return <CardBeer key={i.id} name={i.name}
                          description={i.description} image_url={i.image_url}
-                         item={i} itemId={i.id}/>
+                         itemId={i.id}/>
     })
+
+    const skeletons = [...new Array(4)].map((_, i) => <SkeletonCardBeer
+        key={i}/>)
 
     return (
         <div className={style.wrapper}>
             <div className={style.container__items}>
-                {elementBeer}
+                { isLoading ? skeletons : elementBeer}
             </div>
             <div className={style.container__paginate}>
                 <Pagination currentPage={currentPage}
@@ -38,13 +44,11 @@ export const Cards = () => {
                             onChangePage={onChangePage}
                 />
             </div>
-
         </div>
     );
 };
 
 export type ItemsType = Array<ItemType>
-
 
 export type ItemType = {
     id: number

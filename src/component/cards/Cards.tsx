@@ -33,7 +33,6 @@ export const Cards = () => {
                 {elementBeer}
             </div>
             <div className={style.container__paginate}>
-
                 <Pagination currentPage={currentPage}
                             pageCount={pageCount}
                             onChangePage={onChangePage}
@@ -44,7 +43,7 @@ export const Cards = () => {
     );
 };
 
-type ItemsType = Array<ItemType>
+export type ItemsType = Array<ItemType>
 
 
 export type ItemType = {

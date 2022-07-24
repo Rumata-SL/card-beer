@@ -1,6 +1,9 @@
-*{
+* {
   box-sizing: border-box;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@600&display=swap');
 
 .container {
   width: 450px;
@@ -12,18 +15,17 @@
   text-align: center;
   backdrop-filter: blur(18px);
   background-color: rgba(8, 8, 8, 0.58);
-  //margin-bottom: 20px;
   margin: 10px;
 
-  @media screen and (max-width: 960px){
+  @media screen and (max-width: 960px) {
     width: 350px;
     height: 180px;
   }
-  @media screen and (max-width: 745px){
+  @media screen and (max-width: 745px) {
     width: 300px;
     height: 150px;
   }
-  @media screen and (max-width: 640px){
+  @media screen and (max-width: 640px) {
     width: 320px;
     height: 120px;
     margin: 1px;
@@ -33,85 +35,70 @@
   .container__img {
     box-sizing: border-box;
     width: 200px;
-    height: 200px;
+    height: 100%;
     padding: 5px;
-    border-bottom: 1px solid #fff;
-    border-radius:8px 0 0  8px ;
+    border-radius: 8px 0 0 8px;
     display: flex;
     justify-content: center;
     backdrop-filter: blur(6px);
     background-color: rgb(255, 255, 255);
 
-    @media screen and (max-width: 960px){
+    @media screen and (max-width: 960px) {
       width: 180px;
-      height: 180px;
     }
-    @media screen and (max-width: 745px){
+    @media screen and (max-width: 745px) {
       width: 150px;
-      height: 150px;
     }
-    @media screen and (max-width: 640px){
+    @media screen and (max-width: 640px) {
       width: 90px;
-      height: 120px;
-      //padding: 2px;
+
     }
 
     .imgBeer {
       width: 60px;
       height: auto;
-      //border-radius: 8px;
 
-      @media screen and (max-width: 640px){
+      @media screen and (max-width: 745px) {
+        width: 45px;
+      }
+      @media screen and (max-width: 640px) {
         width: 40px;
+        height: auto;
       }
     }
   }
 
-  .container__description{
+  .container__description {
     box-sizing: border-box;
     width: 250px;
-    height: 198px;
-    padding: 2px;
-    //display: flex;
-    //align-items: center;
-    //justify-content: center;
+    height: 100%;
 
-    @media screen and (max-width: 960px){
-      //width: 240px;
-      height: 180px;
-    }
-    @media screen and (max-width: 745px){
-      height: 150px;
-      padding: 0;
-    }
-    @media screen and (max-width: 640px){
-      height: 120px;
-    }
+    .title {
+      font-family: 'Edu NSW ACT Foundation', cursive;
+      font-size: 1.3em;
+      font-weight: 700;
+      margin: 10px 3px;
 
-    .title{
-      font-size: 1.2em;
-      margin: 15px 3px;
-      @media screen and (max-width: 640px){
+      @media screen and (max-width: 640px) {
         font-size: 1em;
       }
     }
-    .description{
+
+    .description {
       padding: 5px;
-      font-size: 16px;
+      font-size: 18px;
+      font-family: 'Edu NSW ACT Foundation', cursive;
       text-align: justify;
       margin: 0 3px;
 
-
-      @media screen and (max-width: 960px){
+      @media screen and (max-width: 960px) {
         padding: 3px;
-        font-size: 13px;
+        font-size: 15px;
       }
-      @media screen and (max-width: 745px){
+      @media screen and (max-width: 745px) {
         padding: 2px;
-        font-size: 10px;
+        font-size: 14px;
       }
     }
   }
-
-
 }

@@ -4,7 +4,7 @@
 }
 .pagination {
   margin: 0 auto;
-  width: 60%;
+  min-width: 300px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -13,7 +13,17 @@
     display: inline-block;
     width: 40px;
     height: 40px;
+    border-radius: 20px;
     margin: 10px;
+    backdrop-filter: blur(18px);
+    background-color: rgba(8, 8, 8, 0.58);
+
+
+    @media screen and (max-width: 660px){
+      width: 30px;
+      height: 30px;
+      margin: 8px;
+    }
 
 
     a {
@@ -22,15 +32,20 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      //padding: 10px;
-      border: 1px solid #fff;
+      border: 1px solid cyan;
       border-radius: 20px;
       text-align: center;
       color: #fff;
+
+      @media screen and (max-width: 660px){
+        width: 30px;
+        height: 30px;
+
+      }
     }
 
     &:hover {
-      background-color: #70e3c9;
+      background-color: #24b79f;
       cursor: pointer;
       border-radius: 20px;
 

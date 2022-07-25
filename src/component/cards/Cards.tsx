@@ -12,8 +12,11 @@ export const Cards = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [items, setItems] = useState<ItemsType | []>([])
 
+    const searchName = 0 ? `&beer_name=BLITZ` : ''
+
+
     useEffect(() => {
-            axios.get(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=4`)
+            axios.get(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=4${searchName}`)
                 .then(res => {
                     setItems(res.data)
                     setIsLoading(false)

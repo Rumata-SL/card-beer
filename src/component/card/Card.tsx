@@ -1,18 +1,23 @@
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
-import {ItemType} from "../cards/Cards";
 import style from "./Card.module.scss"
-import axios from "axios";
+import {useParams} from "react-router-dom";
+import React, {useEffect} from "react";
 import imgBeer from "../../assets/image/beer.png";
 
+import {store, useAppDispatch, useAppSelector} from "../../redux/store";
+import {getItemTC} from "../../redux/reducers/cardReducer";
+
+
 export const Card = () => {
+    const item = useAppSelector(store => store.cardReducer.item[0])
+    const dispatch = useAppDispatch()
     const {id} = useParams()
-    const [item, setItem] = useState<ItemType | null>(null)
+    const itemId = Number(id)
+
 
     useEffect(() => {
-        axios.get(`https://api.punkapi.com/v2/beers/${id}`)
-            .then(res=>setItem(res.data[0]))
-    },[id])
+        dispatch(getItemTC(itemId))
+
+    }, [id])
 
 
     if (!item) return <div>Loading...</div>
@@ -27,12 +32,14 @@ export const Card = () => {
             <div className={style.container__property}>
                 <h2 className={style.title}> {item.name}</h2>
                 <div>
-                    <span className={style.title__description}>Tagline :</span><br/>{item.tagline}
+                    <span
+                        className={style.title__description}>Tagline :</span><br/>{item.tagline}
                 </div>
                 <hr className={style.hr__line}/>
                 <br/>
                 <div>
-                    <span className={style.title__description}>Description :</span><br/>{item.description}
+                    <span
+                        className={style.title__description}>Description :</span><br/>{item.description}
                 </div>
                 <br/>
                 <div>
@@ -40,9 +47,15 @@ export const Card = () => {
                 </div>
                 <br/>
                 <div>
-                    <span className={style.title__description}>Food pairing : </span><br/>{item.food_pairing}
+                    <span
+                        className={style.title__description}>Food pairing : </span><br/>{item.food_pairing}
                 </div>
             </div>
         </div>
     );
 };
+
+// const [item, setItem] = useState<ItemType | null>(null)
+
+/*axios.get(`https://api.punkapi.com/v2/beers/${id}`)
+           .then(res => setItem(res.data[0]))*/

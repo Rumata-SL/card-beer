@@ -1,13 +1,12 @@
-import {ItemsType} from "../../component/cards/Cards";
 import {ThunkType} from "../store";
-import axios, {AxiosError} from "axios";
 import {beerApi} from "../../api/api";
+import axios, {AxiosError} from "axios";
 
 type InitialStateType = {
     isLoading: boolean
     currentPage: number
     searchValue: string
-    beers: ItemsType
+    beers: Array<ItemType>
 }
 
 const initialState: InitialStateType = {
@@ -81,7 +80,6 @@ const initialState: InitialStateType = {
     }],
 }
 
-
 export const cardsReducer = (state: InitialStateType = initialState, action: CardsActionType): InitialStateType => {
     switch (action.type) {
         case "cards/GET_ITEMS": {
@@ -91,9 +89,9 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Car
             return {...state, isLoading: action.isLoading}
         }
         case "cards/SET_CURRENT_PAGE": {
-           return {...state, currentPage: action.currentPage}
+            return {...state, currentPage: action.currentPage}
         }
-        case "cards/CHANGE_SEARCH_VALUE":{
+        case "cards/CHANGE_SEARCH_VALUE": {
             return {...state, searchValue: action.value}
         }
         default:
@@ -103,11 +101,11 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Car
 
 export type CardsActionType =
     ReturnType<typeof getItemsAC>
-    | ReturnType<typeof setLoadingStatusAC>
     | ReturnType<typeof setCurrentPageAC>
+    | ReturnType<typeof setLoadingStatusAC>
     | ReturnType<typeof changeSearchValueAC>
 
-export const getItemsAC = (beers: ItemsType) => ({
+export const getItemsAC = (beers: Array<ItemType>) => ({
     type: "cards/GET_ITEMS",
     beers
 } as const)
@@ -123,15 +121,15 @@ export const setCurrentPageAC = (currentPage: number) => ({
     currentPage
 } as const)
 
-export const changeSearchValueAC = (value: string)=>({
+export const changeSearchValueAC = (value: string) => ({
     type: "cards/CHANGE_SEARCH_VALUE",
     value
 } as const)
 
-export const getCardTC = (page: number, per_page: number, beer_name:string): ThunkType => async dispatch => {
+export const getCardTC = (page: number, per_page: number, beer_name: string): ThunkType => async dispatch => {
     try {
         dispatch(setLoadingStatusAC(false))
-        const res = await beerApi.getBeer(page, per_page, beer_name)
+        const res = await beerApi.getBeers(page, per_page, beer_name)
         dispatch(getItemsAC(res.data))
         dispatch(setLoadingStatusAC(true))
     } catch (e) {
@@ -143,4 +141,69 @@ export const getCardTC = (page: number, per_page: number, beer_name:string): Thu
             // dispatch(setAppErrorAC(`Native error ${err.message}`))
         }
     }
+}
+
+export type ItemType = {
+    id: number
+    name: string
+    tagline: string
+    first_brewed: string
+    description: string
+    image_url: string
+    abv: number
+    ibu: number
+    target_fg: number
+    target_og: number
+    ebc: number
+    srm: number
+    ph: number
+    attenuation_level: number
+    volume: {
+        value: number
+        unit: string
+    }
+    boil_volume: {
+        value: number
+        unit: string
+    }
+    method: {
+        mash_temp: Array<{
+            temp: {
+                value: number
+                unit: string
+            }
+            duration: number
+        }>
+
+
+        fermentation: {
+            temp: {
+                value: number
+                unit: string
+            }
+        }
+        twist: null
+    }
+    ingredients: {
+        malt: Array<{
+            name: string
+            amount: {
+                value: number
+                unit: string
+            }
+        }>
+        hops: Array<{
+            name: string
+            amount: {
+                value: number
+                unit: string
+            }
+            add: string
+            attribute: string
+        }>
+        yeast: string
+    }
+    food_pairing: Array<string>
+    brewers_tips: string
+    contributed_by: string
 }

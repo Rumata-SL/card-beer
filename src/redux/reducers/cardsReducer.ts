@@ -6,12 +6,14 @@ import {beerApi} from "../../api/api";
 type InitialStateType = {
     isLoading: boolean
     currentPage: number
+    searchValue: string
     beers: ItemsType
 }
 
 const initialState: InitialStateType = {
     isLoading: false,
     currentPage: 1,
+    searchValue: "",
     beers: [{
         id: 1,
         name: "Buzz",
@@ -91,19 +93,19 @@ export const cardsReducer = (state: InitialStateType = initialState, action: Car
         case "cards/SET_CURRENT_PAGE": {
            return {...state, currentPage: action.currentPage}
         }
+        case "cards/CHANGE_SEARCH_VALUE":{
+            return {...state, searchValue: action.value}
+        }
         default:
             return state
     }
 }
 
 export type CardsActionType =
-    GetItemsType
+    ReturnType<typeof getItemsAC>
     | ReturnType<typeof setLoadingStatusAC>
     | ReturnType<typeof setCurrentPageAC>
-
-type GetItemsType =
-    ReturnType<typeof getItemsAC>
-
+    | ReturnType<typeof changeSearchValueAC>
 
 export const getItemsAC = (beers: ItemsType) => ({
     type: "cards/GET_ITEMS",
@@ -121,11 +123,17 @@ export const setCurrentPageAC = (currentPage: number) => ({
     currentPage
 } as const)
 
-export const getCardTC = (page: number, per_page: number): ThunkType => async dispatch => {
+export const changeSearchValueAC = (value: string)=>({
+    type: "cards/CHANGE_SEARCH_VALUE",
+    value
+} as const)
+
+export const getCardTC = (page: number, per_page: number, beer_name:string): ThunkType => async dispatch => {
     try {
         dispatch(setLoadingStatusAC(false))
-        const res = await beerApi.getBeer(page, per_page)
+        const res = await beerApi.getBeer(page, per_page, beer_name)
         dispatch(getItemsAC(res.data))
+        dispatch(setLoadingStatusAC(true))
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
         if (axios.isAxiosError(err)) {

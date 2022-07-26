@@ -1,20 +1,28 @@
 import style from "./Search.module.scss"
 import React, {ChangeEvent, useState} from "react";
+import {useAppDispatch, useAppSelector} from "../../redux/store";
+import {
+    changeSearchValueAC,
+    getCardTC
+} from "../../redux/reducers/cardsReducer";
 
 export const Search = () => {
-    const [value, setValue] = useState("")
+    const searchValue = useAppSelector(state => state.cardsReducer.searchValue)
+    const currentPage = useAppSelector(store => store.cardsReducer.currentPage)
+    const dispatch = useAppDispatch()
 
     const onChangeHandler = (e:ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value)
+        dispatch(changeSearchValueAC(e.target.value))
     }
 
     const onClickHandler= ()=>{
-        setValue("")
+        dispatch(getCardTC(currentPage, 4, searchValue))
+        dispatch(changeSearchValueAC(""))
     }
     return (
         <div className={style.wrapper}>
             <input className={style.input}
-                   value={value}
+                   value={searchValue}
                    onChange={onChangeHandler}
                    onClick={onClickHandler}
                    type="text"

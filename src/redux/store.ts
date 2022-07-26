@@ -6,7 +6,7 @@ import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 const rootReducer = combineReducers({
     cardsReducer: cardsReducer
 })
-const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware));
+export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 export type AppRootActionsType = CardsActionType
@@ -18,4 +18,4 @@ export type DispatchActionType = ThunkDispatch<AppRootStateType, unknown, AppRoo
 export const useAppDispatch = () => useDispatch<DispatchActionType>()
 export const useAppSelector: TypedUseSelectorHook<AppRootStateType> = useSelector
 
-export default store
+// export default store

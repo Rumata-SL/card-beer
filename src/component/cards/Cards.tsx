@@ -1,38 +1,29 @@
-import {SkeletonCardBeer} from "../skeletons/SkeletonCardBeer";
-import React, {useEffect, useState} from "react";
-import {Pagination} from "../paginate/Pagination";
-import {CardBeer} from "./cardBeer/CardBeer";
+import React, {useEffect} from "react";
 import style from "./Cards.module.scss"
-import axios from "axios";
-import store, {useAppDispatch, useAppSelector} from "../../redux/store";
-import {setCurrentPageAC} from "../../redux/reducers/cardsReducer";
+import {CardBeer} from "./cardBeer/CardBeer";
+import {Pagination} from "../paginate/Pagination";
+import {SkeletonCardBeer} from "../skeletons/SkeletonCardBeer";
+import {store, useAppDispatch, useAppSelector} from "../../redux/store";
+import {getCardTC, setCurrentPageAC} from "../../redux/reducers/cardsReducer";
 
 
 export const Cards = () => {
     const dispatch = useAppDispatch()
     const beers = useAppSelector(store => store.cardsReducer.beers)
-    const currentPage = useAppSelector(store=>store.cardsReducer.currentPage)
-
-    const pageCount = 80
-    const [isLoading, setIsLoading] = useState(false)
-    const [items, setItems] = useState<ItemsType | []>([])
-
-    const searchName = 0 ? `&beer_name=BLITZ` : ""
+    const isLoading = useAppSelector(store => store.cardsReducer.isLoading)
+    const currentPage = useAppSelector(store => store.cardsReducer.currentPage)
+    const searchValue = useAppSelector(store=>store.cardsReducer.searchValue)
 
 
     useEffect(() => {
-        axios.get(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=4${searchName}`)
-            .then(res => {
-                setItems(res.data)
-                setIsLoading(true)
-            })
-    }, [currentPage])
+        dispatch(getCardTC(currentPage, 4, searchValue))
+    }, [currentPage, searchValue])
 
     const onChangePage = (page: number) => {
         dispatch(setCurrentPageAC(page))
     }
 
-    const elementBeer = items.map((i) => {
+    const elementBeer = beers.map((i) => {
         return <CardBeer key={i.id} name={i.name}
                          description={i.description} image_url={i.image_url}
                          itemId={i.id}/>
@@ -44,12 +35,12 @@ export const Cards = () => {
     return (
         <div className={style.wrapper}>
             <div className={style.container__items}>
-                {!isLoading ? elementBeer : skeletons}
+                {isLoading ? elementBeer : skeletons}
             </div>
             <div className={style.container__paginate}>
-                <Pagination currentPage={currentPage}
-                            pageCount={pageCount}
-                            onChangePage={onChangePage}
+                <Pagination
+                    currentPage={currentPage}
+                    onChangePage={onChangePage}
                 />
             </div>
         </div>
@@ -122,3 +113,12 @@ export type ItemType = {
     brewers_tips: string
     contributed_by: string
 }
+
+/*useEffect(() => {
+        axios.get(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=4${searchName}`)
+            .then(res => {
+                // setItems(res.data)
+                dispatch(getItemsAC(res.data))
+                dispatch(setLoadingStatusAC(true))
+            })
+    }, [currentPage])*/

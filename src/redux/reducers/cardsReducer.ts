@@ -6,6 +6,7 @@ type InitialStateType = {
     isLoading: boolean
     currentPage: number
     searchValue: string
+    pageCount: number
     beers: Array<ItemType>
 }
 
@@ -13,6 +14,7 @@ const initialState: InitialStateType = {
     isLoading: false,
     currentPage: 1,
     searchValue: "",
+    pageCount: 70,
     beers: [{
         id: 1,
         name: "Buzz",
@@ -104,6 +106,7 @@ export type CardsActionType =
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setLoadingStatusAC>
     | ReturnType<typeof changeSearchValueAC>
+
 
 export const getItemsAC = (beers: Array<ItemType>) => ({
     type: "cards/GET_ITEMS",

@@ -2,7 +2,7 @@ import React, {useEffect} from "react";
 import style from "./Cards.module.scss"
 import {CardBeer} from "./cardBeer/CardBeer";
 import {Pagination} from "../paginate/Pagination";
-import {SkeletonCardBeer} from "../skeletons/SkeletonCardBeer";
+import {SkeletonCardBeer} from "../skeleton/SkeletonCardBeer";
 import {store, useAppDispatch, useAppSelector} from "../../redux/store";
 import {getCardTC, setCurrentPageAC} from "../../redux/reducers/cardsReducer";
 
@@ -12,12 +12,11 @@ export const Cards = () => {
     const beers = useAppSelector(store => store.cardsReducer.beers)
     const isLoading = useAppSelector(store => store.cardsReducer.isLoading)
     const currentPage = useAppSelector(store => store.cardsReducer.currentPage)
-    const searchValue = useAppSelector(store=>store.cardsReducer.searchValue)
-
+    const searchValue = useAppSelector(store => store.cardsReducer.searchValue)
 
     useEffect(() => {
         dispatch(getCardTC(currentPage, 4, searchValue))
-    }, [currentPage, searchValue])
+    }, [currentPage])
 
     const onChangePage = (page: number) => {
         dispatch(setCurrentPageAC(page))

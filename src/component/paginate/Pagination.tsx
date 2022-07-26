@@ -1,6 +1,7 @@
-import ReactPaginate, {ReactPaginateProps} from "react-paginate";
-import style from "./Pagination.module.scss"
 import React, {FC} from "react";
+import style from "./Pagination.module.scss"
+import {useAppSelector} from "../../redux/store";
+import ReactPaginate, {ReactPaginateProps} from "react-paginate";
 
 type PaginationType = {
     currentPage:number
@@ -10,13 +11,14 @@ type PaginationType = {
 
 export const Pagination:FC<PaginationType> = (props) => {
     const {onChangePage, currentPage,renderOnZeroPageCount} = props
+    const pageCount = useAppSelector(state=>state.cardsReducer.pageCount)
 
     return (
         <ReactPaginate
             nextLabel=" >"
             breakLabel="..."
             previousLabel="< "
-            pageCount={80}
+            pageCount={pageCount}
             marginPagesDisplayed={1}
             forcePage={currentPage - 1}
             pageRangeDisplayed={1}

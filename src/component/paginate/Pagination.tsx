@@ -4,14 +4,14 @@ import {useAppSelector} from "../../redux/store";
 import ReactPaginate, {ReactPaginateProps} from "react-paginate";
 
 type PaginationType = {
-    currentPage:number
-    onChangePage:(e:number)=>void
+    currentPage: number
+    onChangePage: (e: number) => void
     renderOnZeroPageCount?: (props: ReactPaginateProps) => void | null;
 }
 
-export const Pagination:FC<PaginationType> = (props) => {
-    const {onChangePage, currentPage,renderOnZeroPageCount} = props
-    const pageCount = useAppSelector(state=>state.cardsReducer.pageCount)
+export const Pagination: FC<PaginationType> = (props) => {
+    const {onChangePage, currentPage, renderOnZeroPageCount} = props
+    const pageCount = useAppSelector(state => state.cardsReducer.pageCount)
 
     return (
         <ReactPaginate
@@ -24,7 +24,7 @@ export const Pagination:FC<PaginationType> = (props) => {
             pageRangeDisplayed={1}
             className={style.pagination}
             renderOnZeroPageCount={renderOnZeroPageCount}
-            onPageChange={(e)=>onChangePage(e.selected + 1)}
+            onPageChange={(e) => onChangePage(e.selected + 1)}
 
         />
     );

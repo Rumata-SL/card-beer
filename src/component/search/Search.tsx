@@ -2,7 +2,10 @@ import debounce from "lodash.debounce";
 import style from "./Search.module.scss";
 import React, {ChangeEvent, useCallback, useState} from "react";
 import {useAppDispatch, useAppSelector} from "../../redux/store";
-import {changeSearchValueAC, getCardTC} from "../../redux/reducers/cardsReducer";
+import {
+    changeSearchValueAC,
+    getCardTC
+} from "../../redux/reducers/cardsReducer";
 
 export const Search = () => {
     const dispatch = useAppDispatch()

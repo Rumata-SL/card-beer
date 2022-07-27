@@ -1,7 +1,7 @@
-import imgBeer from "../../../assets/image/beer.png"
-import style from "./CardBeer.module.scss"
-import {NavLink} from "react-router-dom";
 import React, {FC} from "react";
+import {NavLink} from "react-router-dom";
+import style from "./CardBeer.module.scss"
+import imgBeer from "../../../assets/image/beer.png"
 
 
 type CardBeerPropsType = {

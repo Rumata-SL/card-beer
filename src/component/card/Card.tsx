@@ -1,5 +1,5 @@
 import style from "./Card.module.scss"
-import React, {FC, useEffect} from "react";
+import React, {useEffect} from "react";
 import {useParams} from "react-router-dom";
 import {TitleCard} from "./titleCard/TitleCard";
 import {Preloader} from "../preloader/Preloader";

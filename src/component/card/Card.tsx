@@ -1,11 +1,11 @@
 import style from "./Card.module.scss"
 import React, {FC, useEffect} from "react";
 import {useParams} from "react-router-dom";
+import {TitleCard} from "./titleCard/TitleCard";
+import {Preloader} from "../preloader/Preloader";
 import imgBeer from "../../assets/image/beer.png";
 import {getItemTC} from "../../redux/reducers/cardReducer";
 import {store, useAppDispatch, useAppSelector} from "../../redux/store";
-import {TitleCard} from "./titleCard/TitleCard";
-
 
 export const Card = () => {
     const dispatch = useAppDispatch()
@@ -13,13 +13,11 @@ export const Card = () => {
     const {id} = useParams()
     const itemId = Number(id)
 
-
     useEffect(() => {
         dispatch(getItemTC(itemId))
     }, [id])
 
-    if (!item) return <div>Loading...</div>
-
+    if (!item) return <Preloader/>
     let picture = `${!item.image_url ? imgBeer : item.image_url}`
     return (
         <div className={style.container}>

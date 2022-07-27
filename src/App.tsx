@@ -1,9 +1,9 @@
-import {Navigate, Route, Routes} from "react-router-dom";
-import {Header} from "./component/header/Header";
-import {Cards} from "./component/cards/Cards";
-import {Card} from "./component/card/Card";
-import React from "react";
 import "./App.scss";
+import React from "react";
+import {Card} from "./component/card/Card";
+import {Cards} from "./component/cards/Cards";
+import {Header} from "./component/header/Header";
+import {Navigate, Route, Routes} from "react-router-dom";
 
 function App() {
     return (

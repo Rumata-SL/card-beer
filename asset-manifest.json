@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/card-beer/static/css/main.cc767971.css",
+    "main.js": "/card-beer/static/js/main.3d9385d6.js",
+    "static/js/787.ca078401.chunk.js": "/card-beer/static/js/787.ca078401.chunk.js",
+    "static/media/pub.jpg": "/card-beer/static/media/pub.57c07ff45d4c20f9dfa1.jpg",
+    "static/media/beer.png": "/card-beer/static/media/beer.61246e8ac5e8403957f4.png",
+    "static/media/home-page.png": "/card-beer/static/media/home-page.94a0d1e8ed8d762e1ec8.png",
+    "index.html": "/card-beer/index.html",
+    "main.cc767971.css.map": "/card-beer/static/css/main.cc767971.css.map",
+    "main.3d9385d6.js.map": "/card-beer/static/js/main.3d9385d6.js.map",
+    "787.ca078401.chunk.js.map": "/card-beer/static/js/787.ca078401.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cc767971.css",
+    "static/js/main.3d9385d6.js"
+  ]
+}

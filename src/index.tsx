@@ -1,21 +1,21 @@
-import reportWebVitals from "./reportWebVitals";
-import {BrowserRouter} from "react-router-dom";
-import ReactDOM from "react-dom/client";
-import React from "react";
-import App from "./App";
 import "./index.css";
-import {Provider} from "react-redux";
+import App from "./App";
+import React from "react";
 import {store} from "./redux/store"
+import {Provider} from "react-redux";
+import ReactDOM from "react-dom/client";
+import {HashRouter} from "react-router-dom";
+import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
 root.render(
-    <BrowserRouter>
+    <HashRouter>
         <Provider store={store}>
             <App/>
         </Provider>
-    </BrowserRouter>
+    </HashRouter>
 );
 
 reportWebVitals();

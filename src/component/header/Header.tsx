@@ -1,8 +1,8 @@
-import home from "../../assets/image/home-page.png"
-import {NavLink} from "react-router-dom";
-import style from "./Header.module.scss"
-import {Search} from "../search/Search";
 import React from "react";
+import {Search} from "../search/Search";
+import style from "./Header.module.scss"
+import {NavLink} from "react-router-dom";
+import home from "../../assets/image/home-page.png"
 
 type IsActive = {
     isActive: boolean
